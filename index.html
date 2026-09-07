@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>引力場 · 電場 · 磁場 立體模擬器</title>
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>引力場 · 電場 · 磁場 立體模擬器</h1>
+        <p>三維觀察場線方向、場強大小同試驗質點／電荷受力運動。切換三種場，對照公式與軌跡。</p>
+      </div>
+      <span class="badge">HKDSE · 場與力</span>
+    </header>
+    <div class="grid">
+      <section class="card">
+        <div class="stage">
+          <canvas id="world" width="980" height="480"></canvas>
+          <div class="hud">
+            <div class="chip" id="hudMain">—</div>
+            <div class="chip" id="hudSub">—</div>
+            <div class="chip" id="hudHint">拖曳旋轉 · 滾輪縮放</div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn btn-play" id="btnPlay">▶ 播放運動</button>
+          <button class="btn btn-stop" id="btnReset">↻ 重設</button>
+          <button class="btn btn-ghost" id="btnAuto">↻ 自動旋轉</button>
+          <button class="btn btn-ghost" id="btnView">視角還原</button>
+          <label class="speed">播放速率
+            <select id="rate">
+              <option value="0.25">0.25×</option>
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+            </select>
+          </label>
+        </div>
+        <div class="eqs">
+          <article class="eq active" id="eqA"><h3 id="eqATitle">場強</h3><div class="formula" id="eqAForm"></div><div class="plug" id="plugA"></div></article>
+          <article class="eq" id="eqB"><h3 id="eqBTitle">受力</h3><div class="formula" id="eqBForm"></div><div class="plug" id="plugB"></div></article>
+          <article class="eq" id="eqC"><h3 id="eqCTitle">備註</h3><div class="formula" id="eqCForm"></div><div class="plug" id="plugC"></div></article>
+        </div>
+        <div class="graphs">
+          <div class="gbox"><h4 id="g1Title">關係圖 1</h4><canvas class="graph" id="g1" width="520" height="160"></canvas></div>
+          <div class="gbox"><h4 id="g2Title">關係圖 2</h4><canvas class="graph" id="g2" width="520" height="160"></canvas></div>
+        </div>
+      </section>
+      <aside class="card">
+        <div class="field-tabs" id="fields"></div>
+        <div class="mode-row" id="modes"></div>
+        <div class="vars" id="vars"></div>
+        <p class="warn" id="warn"></p>
+        <div class="presets" id="presets"></div>
+        <div class="legend" id="legend"></div>
+        <footer>
+          場線只表示<strong>方向同相對疏密</strong>，唔代表真實密度標度。引力永遠指向質量中心；電場由正電荷指向負電荷；磁場由 N 極指向 S 極。帶電粒子喺均匀磁場嘅運動用 F = q(v × B)。動畫用示範質量同時間比例，方便課堂觀察軌跡，數值面板仍用 SI 單位計算。<br />
+          本頁完全喺瀏覽器內運算：無帳戶、無 Cookie、無分析、無對外連線、唔儲存任何學生輸入。可用滑鼠拖曳旋轉 3D 場景。
+        </footer>
+      </aside>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
